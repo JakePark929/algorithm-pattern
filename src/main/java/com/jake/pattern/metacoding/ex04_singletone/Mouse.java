@@ -1,4 +1,4 @@
-package com.jake.pattern.metacoding.ex01_strategy;
+package com.jake.pattern.metacoding.ex04_singletone;
 
 public class Mouse extends Animal {
     private String name = "쥐";

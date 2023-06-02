@@ -13,9 +13,10 @@ public class P87389 {
     public int solution(int n) {
         int answer = 0;
         if (3 <= n && n <= 1000000) {
-            for (int i = n; i >= 1; i--) {
+            for (int i = 1; i <= n; i++) {
                 if (n % i == 1) {
                     answer = i;
+                    break;
                 }
             }
         }
@@ -25,5 +26,10 @@ public class P87389 {
     // 다른 사람의 풀이
     public int anotherSolution(int n) {
         return IntStream.range(2, n).filter(i -> n % i == 1).findFirst().orElse(0);
+    }
+
+    public static void main(String[] args) {
+        P87389 p = new P87389();
+        System.out.println(p.solution(12));
     }
 }

@@ -17,7 +17,7 @@ import java.util.LinkedList;
  * 배열 arr의 크기 : 1,000,000 이하의 자연수
  * 배열 arr의 원소의 크기 : 0보다 크거나 같고 9보다 작거나 같은 정수
  * <p>
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12906 {
     public LinkedList<Integer> solution(int[] arr) {

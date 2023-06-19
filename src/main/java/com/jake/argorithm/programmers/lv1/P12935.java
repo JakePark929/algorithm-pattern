@@ -14,7 +14,7 @@ import java.util.LinkedList;
  * arr은 길이 1 이상인 배열입니다.
  * 인덱스 i, j에 대해 i ≠ j이면 arr[i] ≠ arr[j] 입니다.
  * <p>
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12935 {
     public LinkedList<Integer> solution(int[] arr) {

@@ -9,7 +9,7 @@ package com.jake.argorithm.programmers.lv1;
  * 제한 사항
  * n은 1이상, 50000000000000 이하인 양의 정수입니다.
  * <p>
- * 작성일: 2023.06.16
+ * 작성일 : 2023.06.16
  */
 class P12934 {
     public long solution(long n) {

@@ -11,7 +11,7 @@ package com.jake.argorithm.programmers.lv1;
  * s는 부호와 숫자로만 이루어져있습니다.
  * s는 "0"으로 시작하지 않습니다.
  *
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12925 {
     public int solution(String s) {

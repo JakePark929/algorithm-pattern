@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * divisor는 자연수입니다.
  * array는 길이 1 이상인 배열입니다.
  *
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12910 {
     public List<Integer> solution(int[] arr, int divisor) {

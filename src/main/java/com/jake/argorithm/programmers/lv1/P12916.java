@@ -10,7 +10,7 @@ import java.util.Arrays;
  *
  * 예를 들어 s가 "pPoooyY"면 true를 return하고 "Pyy"라면 false를 return합니다.
  *
- * 작성일: 2023.06.02
+ * 작성일 : 2023.06.02
  */
 class P12916 {
     boolean solution(String s) {

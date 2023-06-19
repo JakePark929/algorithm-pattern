@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 제한사항
  * s는 길이가 1 이상, 100이하인 스트링입니다.
  *
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12903 {
     String solution(String s) {

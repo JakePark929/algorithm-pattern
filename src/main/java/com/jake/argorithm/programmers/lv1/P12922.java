@@ -9,7 +9,7 @@ package com.jake.argorithm.programmers.lv1;
  * 제한 조건
  * n은 길이 10,000이하인 자연수입니다.
  * <p>
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12922 {
     public String solution(int n) {

@@ -18,7 +18,6 @@ import java.util.HashMap;
  *
  * 작성일 : 2023.06.19
  */
-
 public class P42576 {
     public String solution(String[] participant, String[] completion) {
         Arrays.sort(participant);

@@ -10,7 +10,7 @@ package com.jake.argorithm.programmers.lv1;
  * s는 길이 1 이상, 길이 8 이하인 문자열입니다.
  * s는 영문 알파벳 대소문자 또는 0부터 9까지 숫자로 이루어져 있습니다.
  * <p>
- * 작성일 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12918 {
     public boolean solution(String s) {

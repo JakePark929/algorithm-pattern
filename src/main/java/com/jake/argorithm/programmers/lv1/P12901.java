@@ -18,7 +18,7 @@ import java.util.Locale;
  * 2016년은 윤년입니다.
  * 2016년 a월 b일은 실제로 있는 날입니다. (13월 26일이나 2월 45일같은 날짜는 주어지지 않습니다)
  *
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12901 {
     public String solution(int a, int b) {

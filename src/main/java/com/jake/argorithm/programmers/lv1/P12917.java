@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * 제한 사항
  * str은 길이 1 이상인 문자열입니다.
  * <p>
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12917 {
     public String solution(String s) {

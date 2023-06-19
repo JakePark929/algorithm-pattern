@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * 제한 조건
  * n은 2이상 1000000이하의 자연수입니다.
  * <p>
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12921 {
     public int solution(int n) {

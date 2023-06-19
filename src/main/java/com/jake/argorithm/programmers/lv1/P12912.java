@@ -11,7 +11,7 @@ package com.jake.argorithm.programmers.lv1;
  * a와 b는 -10,000,000 이상 10,000,000 이하인 정수입니다.
  * a와 b의 대소관계는 정해져있지 않습니다.
  *
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12912 {
     public long solution(int a, int b) {

@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 제한 조건
  * 행렬 arr1, arr2의 행과 열의 길이는 500을 넘지 않습니다.
  *
- * 작성일: 2023.06.18
+ * 작성일 : 2023.06.18
  */
 class P12950 {
     public int[][] solution(int[][] arr1, int[][] arr2) {

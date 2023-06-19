@@ -13,7 +13,7 @@ import java.util.Comparator;
  * 제한 조건
  * n은 1이상 8000000000 이하인 자연수입니다.
  *
- * 작성일: 2023.06.16
+ * 작성일 : 2023.06.16
  */
 class P12933 {
     public long solution(long n) {

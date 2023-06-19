@@ -13,7 +13,7 @@ package com.jake.argorithm.programmers.lv1;
  * s의 길이는 8000이하입니다.
  * n은 1 이상, 25이하인 자연수입니다.
  *
- * 작성일: 2023.06.15
+ * 작성일 : 2023.06.15
  */
 class P12926 {
     public String solution(String s, int n) {

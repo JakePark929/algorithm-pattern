@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ *[ 제너레이터 ]
  *
  * 어떤 자연수 n이 있을 때, d(n)을 n의 각 자릿수 숫자들과 n 자신을 더한 숫자라고 정의하자.
  *
@@ -22,8 +23,7 @@ import java.util.stream.IntStream;
  *
  * 1 이상이고 5000 보다 작은 모든 셀프 넘버들의 합을 구하라.
  *
- * 작성일: 2023.05.31
- *
+ * 작성일 : 2023.05.31
  */
 
 public class P365_Generator {

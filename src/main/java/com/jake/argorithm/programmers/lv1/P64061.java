@@ -1,6 +1,7 @@
 package com.jake.argorithm.programmers.lv1;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * [ 크레인 인형뽑기 게임 ]
@@ -43,13 +44,58 @@ import java.util.LinkedList;
  */
 class P64061 {
     public int solution(int[][] board, int[] moves) {
-        int answer = 0;
-        LinkedList<LinkedList<Integer>> lists = new LinkedList<>();
-        LinkedList<Integer> list = new LinkedList<>();
+        int[][] dolls = new int[board.length][board[0].length];
+        LinkedList<Integer> basket = new LinkedList<>();
+        LinkedList<Integer> original = new LinkedList<>();
 
-        for(int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                System.out.println(board[i][j]);
+        for (int i = 0; i < board[0].length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                dolls[i][j] = board[j][i];
+            }
+        }
+
+        for (int move : moves) {
+            for (int i = 0; i < dolls.length; i++) {
+                if (dolls[move - 1][i] > 0) {
+                    original.add(dolls[move - 1][i]);
+                    if (basket.size() > 0) {
+                        if (basket.get(basket.size() - 1) == dolls[move - 1][i]) {
+                            basket.removeLast();
+                        } else {
+                            basket.add(dolls[move - 1][i]);
+                        }
+                    } else {
+                        basket.add(dolls[move - 1][i]);
+                    }
+                    dolls[move - 1][i] = 0;
+                    break;
+                }
+            }
+        }
+
+        return original.size() - basket.size();
+    }
+    
+    // 다른 사람의 풀이 1 - 스택사용
+    public int solution1(int[][] board, int[] moves) {
+        int answer = 0;
+        Stack<Integer> stack = new Stack<>();
+        for (int move : moves) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[j][move - 1] != 0) {
+                    if (stack.isEmpty()) {
+                        stack.push(board[j][move - 1]);
+                        board[j][move - 1] = 0;
+                        break;
+                    }
+                    if (board[j][move - 1] == stack.peek()) {
+                        stack.pop();
+                        answer += 2;
+                    } else
+                        stack.push(board[j][move - 1]);
+                    board[j][move - 1] = 0;
+                    break;
+                }
             }
         }
         return answer;
@@ -59,13 +105,14 @@ class P64061 {
         P64061 problem = new P64061();
         System.out.println(problem.solution(
                 new int[][]{
-                        {0, 0, 0, 0, 0},
-                        {0, 0, 1, 0, 3},
-                        {0, 2, 5, 0, 1},
-                        {4, 2, 4, 4, 2},
-                        {3, 5, 1, 3, 1}
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 0, 0},
+                        {10, 10, 10, 10, 10, 10},
                 },
-                new int[]{1, 5, 3, 5, 1, 2, 1, 4})
+                new int[]{1, 3})
         );
     }
 }

@@ -1,5 +1,8 @@
 package com.jake.argorithm.programmers.lv1;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * [ 둘만의 암호 ]
  *
@@ -24,12 +27,104 @@ package com.jake.argorithm.programmers.lv1;
  * skip에 포함되는 알파벳은 s에 포함되지 않습니다.
  * 1 ≤ index ≤ 20
  *
- * 작성일 :
+ * 작성일 : 2023.06.30
  */
 public class P155652 {
     public String solution(String s, String skip, int index) {
-        String answer = "";
-        return answer;
+        StringBuilder answer = new StringBuilder();
+
+        index = index % 26;
+        int originIndex = index;
+
+        for (char c : s.toCharArray()) {
+            index = originIndex;
+            StringBuilder temp = new StringBuilder();
+            for (int i = 0; i <= index; i++) {
+                char next = (char) ((c - 'a' + i) % 26 + 'a');
+                temp.append(next);
+                for(char sk : skip.toCharArray()) {
+                    if (next == sk) {
+                        index = index + 1;
+                    }
+                }
+            }
+            answer.append(temp.substring(temp.toString().length() - 1));
+        }
+
+        return answer.toString();
+    }
+
+    // 다른 사람의 풀이 1
+    public String solution1(String s, String skip, int index) {
+        StringBuilder answer = new StringBuilder();
+
+        for (char letter : s.toCharArray()) {
+            char temp = letter;
+            int idx = 0;
+            while (idx < index) {
+                temp = temp == 'z' ? 'a' : (char) (temp + 1);
+                if (!skip.contains(String.valueOf(temp))) {
+                    idx += 1;
+                }
+            }
+            answer.append(temp);
+        }
+
+        return answer.toString();
+    }
+
+    // 다른 사람의 풀이 2
+    public String solution2(String s, String skip, int index) {
+        return new StringGenerator(index, skip).generate(s);
+    }
+
+    private static class StringGenerator {
+        private final Integer offsetIndex;
+        private final Set<Character> skipCharacters;
+
+        public StringGenerator(Integer offsetIndex, String skipCharacters) {
+            this(offsetIndex, parseSkipCharacters(skipCharacters));
+        }
+
+        public StringGenerator(Integer offsetIndex, Set<Character> skipCharacters) {
+            this.offsetIndex = offsetIndex;
+            this.skipCharacters = skipCharacters;
+        }
+
+        public String generate(String base) {
+            return base.chars()
+                    .mapToObj(character -> (char) character)
+                    .map(this::applyOffset)
+                    .map(String::valueOf)
+                    .collect(Collectors.joining());
+        }
+
+        private Character applyOffset(Character character) {
+            int count = 0;
+            Character applied = character;
+
+            while (count < offsetIndex) {
+                applied++;
+
+                if (applied > 'z') {
+                    applied = 'a';
+                }
+
+                if (skipCharacters.contains(applied)) {
+                    continue;
+                }
+
+                count++;
+            }
+
+            return applied;
+        }
+
+        private static Set<Character> parseSkipCharacters(String skipCharacters) {
+            return skipCharacters.chars()
+                    .mapToObj(character -> (char) character)
+                    .collect(Collectors.toSet());
+        }
     }
 
     public static void main(String[] args) {

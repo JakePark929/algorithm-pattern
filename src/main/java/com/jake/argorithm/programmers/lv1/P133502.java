@@ -1,5 +1,7 @@
 package com.jake.argorithm.programmers.lv1;
 
+import java.util.Stack;
+
 /**
  * [ 햄버거 만들기 ]
  * <p>
@@ -29,25 +31,79 @@ package com.jake.argorithm.programmers.lv1;
 public class P133502 {
     public int solution(int[] ingredient) {
         int hamburger = 0;
-        StringBuilder sb = new StringBuilder();
+        Stack<Integer> ingredients = new Stack<>();
+
         for (int i : ingredient) {
-            sb.append(i);
-        }
-
-        while (true) {
-            if (sb.indexOf("1231") == -1) {
-                break;
-            }
-
-            if (sb.length() >= 4) {
-                sb.delete(sb.indexOf("1231"), sb.indexOf("1231") + 4);
+            ingredients.add(i);
+            if (
+                    ingredients.size() >= 4
+                            && ingredients.get(ingredients.size() - 1) == 1
+                            && ingredients.get(ingredients.size() - 2) == 3
+                            && ingredients.get(ingredients.size() - 3) == 2
+                            && ingredients.get(ingredients.size() - 4) == 1
+            ) {
+                ingredients.pop();
+                ingredients.pop();
+                ingredients.pop();
+                ingredients.pop();
                 hamburger++;
-            } else {
-                break;
             }
         }
 
         return hamburger;
+    }
+
+    // 다른 사람의 풀이 1
+    public int solution1(int[] ingredient) {
+        int[] stack = new int[ingredient.length];
+        int sp = 0;
+        int answer = 0;
+        for (int i : ingredient) {
+            stack[sp++] = i;
+            if (
+                    sp >= 4
+                            && stack[sp - 1] == 1
+                            && stack[sp - 2] == 3
+                            && stack[sp - 3] == 2
+                            && stack[sp - 4] == 1
+            ) {
+                sp -= 4;
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    // 다른 사람의 풀이 2
+    public int solution2(int[] ingredient) {
+        int answer = 0;
+        for (int i = 0; i < ingredient.length - 3; i++) {
+            if (ingredient[i] == 0) continue;
+            if (ingredient[i] == 1 && ingredient[i + 1] == 2 && ingredient[i + 2] == 3 && ingredient[i + 3] == 1) {
+                for (int j = i + 3; j > 0; j--) {
+                    ingredient[j] = (j > 3) ? ingredient[j - 4] : 0;
+                }
+                answer++;
+            }
+        }
+        return answer;
+    }
+
+    // 다른 사람의 풀이 3 (문자열 시간 초과)
+    public int solution3(int[] ingredient) {
+        int answer = 0;
+
+        StringBuilder pack = new StringBuilder();
+        for (int i : ingredient) pack.append(i);
+
+        int index = pack.indexOf("1231");
+
+        while (index != -1) {
+            pack.delete(index, index + 4);
+            answer++;
+            index = pack.indexOf("1231");
+        }
+        return answer;
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package com.jake.argorithm.programmers.lv1;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * [ 달리기 경주 ]
@@ -29,8 +30,22 @@ import java.util.Arrays;
  */
 public class P178871 {
     public String[] solution(String[] players, String[] callings) {
-        String[] answer = {};
-        return answer;
+        HashMap<String, Integer> ranks = new HashMap<>();
+
+        for (int i = 0; i < players.length; i++) {
+            ranks.put(players[i], i);
+        }
+
+        for (String calling : callings) {
+            int rank = ranks.get(calling);
+            String temp = players[rank - 1];
+            players[rank - 1] = calling;
+            players[rank] = temp;
+            ranks.put(calling, rank - 1);
+            ranks.put(temp, rank);
+        }
+
+        return players;
     }
 
     public static void main(String[] args) {

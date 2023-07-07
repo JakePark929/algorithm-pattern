@@ -28,7 +28,7 @@ import java.util.Stack;
  * <p>
  * 작성일 : 2023.06.30
  */
-public class P133502 {
+class P133502 {
     public int solution(int[] ingredient) {
         int hamburger = 0;
         Stack<Integer> ingredients = new Stack<>();

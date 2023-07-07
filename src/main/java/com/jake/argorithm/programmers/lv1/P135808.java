@@ -34,7 +34,7 @@ import java.util.PriorityQueue;
  *
  * 작성일 : 2023.06.22
  */
-public class P135808 {
+class P135808 {
     public int solution(int k, int m, int[] score) {
         int answer = 0;
         PriorityQueue<Integer> priorityQueue = new PriorityQueue(Collections.reverseOrder());

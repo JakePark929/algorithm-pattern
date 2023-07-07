@@ -16,7 +16,7 @@ package com.jake.argorithm.programmers.lv1;
  *
  * 작성일 : 2023.06.20
  */
-public class P82612 {
+class P82612 {
     public long solution(int price, int money, int count) {
         long answer = 0;
 

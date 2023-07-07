@@ -37,7 +37,7 @@ import java.util.LinkedList;
  * <p>
  * 작성일 : 2023.06.22
  */
-public class P176963 {
+class P176963 {
     public LinkedList<Integer> solution(String[] name, int[] yearning, String[][] photo) {
         LinkedList<Integer> answer = new LinkedList<>();
         HashMap<String, Integer> point = new HashMap<>();

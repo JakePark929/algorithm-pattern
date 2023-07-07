@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  *
  * 작성일 : 2023.06.30
  */
-public class P155652 {
+class P155652 {
     public String solution(String s, String skip, int index) {
         StringBuilder answer = new StringBuilder();
 

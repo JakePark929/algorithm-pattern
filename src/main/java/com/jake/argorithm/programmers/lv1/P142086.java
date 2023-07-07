@@ -25,7 +25,7 @@ import java.util.HashMap;
  * <p>
  * 작성일 : 2023.06.22
  */
-public class P142086 {
+class P142086 {
     public int[] solution(String s) {
         int[] answer = new int[s.length()];
         char[] chars = s.toCharArray();

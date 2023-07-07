@@ -62,7 +62,7 @@ package com.jake.argorithm.programmers.lv1;
  * <p>
  * 작성일 : 2023.06.30
  */
-public class P72410 {
+class P72410 {
     // length 3 ~ 15
     // lower, num, -, _, .
     // . no last, no first, no duplicate

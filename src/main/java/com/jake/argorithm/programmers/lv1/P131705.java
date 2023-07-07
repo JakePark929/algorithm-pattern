@@ -22,7 +22,7 @@ import java.util.LinkedList;
  * <p>
  * 작성일 : 2023.06.20
  */
-public class P131705 {
+class P131705 {
     int[] combination;
     int result = 0;
 

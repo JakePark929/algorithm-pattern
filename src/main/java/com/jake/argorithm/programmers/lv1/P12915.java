@@ -20,7 +20,7 @@ import java.util.Comparator;
  *
  * 작성일 : 2023.06.15
  */
-public class P12915 {
+class P12915 {
     public String[] solution(String[] strings, int n) {
         ArrayList<String> list = new ArrayList<>(Arrays.asList(strings));
         Collections.sort(list);

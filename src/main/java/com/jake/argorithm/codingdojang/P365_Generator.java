@@ -26,7 +26,7 @@ import java.util.stream.IntStream;
  * 작성일 : 2023.05.31
  */
 
-public class P365_Generator {
+class P365_Generator {
     public int generator(int number) {
         String[] stringNumber = String.valueOf(number).split("");
 

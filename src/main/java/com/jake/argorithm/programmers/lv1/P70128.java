@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
  *
  * 작성일 : 2023.06.20
  */
-public class P70128 {
+class P70128 {
     public int solution(int[] a, int[] b) {
         int answer = 0;
         for (int i = 0; i < a.length; i++) {

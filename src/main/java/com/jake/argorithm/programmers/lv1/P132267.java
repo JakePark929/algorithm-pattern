@@ -40,7 +40,7 @@ package com.jake.argorithm.programmers.lv1;
  * <p>
  * 작성일 : 2023.06.22
  */
-public class P132267 {
+class P132267 {
     public int solution(int a, int b, int n) {
         int change;
         int cola = 0;

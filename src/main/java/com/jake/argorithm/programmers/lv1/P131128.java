@@ -25,7 +25,7 @@ import java.util.PriorityQueue;
  * <p>
  * 작성일 : 2023.06.26
  */
-public class P131128 {
+class P131128 {
     public String solution(String X, String Y) {
         HashMap<String, Integer> xMap = new HashMap<>();
         HashMap<String, Integer> yMap = new HashMap<>();

@@ -39,7 +39,7 @@ import java.util.LinkedList;
  * <p>
  * 작성일 : 2023.06.22
  */
-public class P134240 {
+class P134240 {
     public String solution(int[] food) {
         LinkedList<Integer> list = new LinkedList<>();
 

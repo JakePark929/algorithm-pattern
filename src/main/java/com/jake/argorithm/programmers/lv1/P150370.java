@@ -67,7 +67,7 @@ import java.util.stream.IntStream;
  * <p>
  * 작성일 : 2023.07.04
  */
-public class P150370 {
+class P150370 {
     public LinkedList<Integer> solution(String today, String[] terms, String[] privacies) {
         int todayY = Integer.parseInt(today.split("\\.")[0]);
         int todayM = Integer.parseInt(today.split("\\.")[1]);

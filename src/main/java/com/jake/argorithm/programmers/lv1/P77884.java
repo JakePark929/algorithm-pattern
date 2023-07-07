@@ -12,7 +12,7 @@ package com.jake.argorithm.programmers.lv1;
  *
  * 작성일 : 2023.06.20
  */
-public class P77884 {
+class P77884 {
     public int solution(int left, int right) {
         int answer = 0;
 

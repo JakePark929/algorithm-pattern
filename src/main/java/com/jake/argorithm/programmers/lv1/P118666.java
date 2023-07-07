@@ -83,7 +83,7 @@ import java.util.stream.IntStream;
  * <p>
  * 작성일 : 2023.07.04
  */
-public class P118666 {
+class P118666 {
     public String solution(String[] survey, int[] choices) {
         StringBuilder answer = new StringBuilder();
         LinkedHashMap<String, Integer> mbti = new LinkedHashMap<>() {{

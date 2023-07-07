@@ -26,9 +26,9 @@ import java.util.HashMap;
  * callings는 players의 원소들로만 이루어져 있습니다.
  * 경주 진행중 1등인 선수의 이름은 불리지 않습니다.
  *
- * 작성일 :
+ * 작성일 : 2023.07.06
  */
-public class P178871 {
+class P178871 {
     public String[] solution(String[] players, String[] callings) {
         HashMap<String, Integer> ranks = new HashMap<>();
 
@@ -47,6 +47,8 @@ public class P178871 {
 
         return players;
     }
+    
+    // 좋아요 많이 받은 문제와 비슷함
 
     public static void main(String[] args) {
         P178871 problem = new P178871();

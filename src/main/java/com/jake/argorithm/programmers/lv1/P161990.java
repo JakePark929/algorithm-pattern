@@ -53,7 +53,7 @@ import java.util.Arrays;
  * <p>
  * 작성일 : 2023.07.04
  */
-public class P161990 {
+class P161990 {
     public int[] solution(String[] wallpaper) {
         int[] answer;
         String[][] walls = new String[wallpaper.length][wallpaper[0].length()];

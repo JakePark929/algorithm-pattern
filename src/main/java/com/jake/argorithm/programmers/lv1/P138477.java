@@ -30,7 +30,7 @@ import java.util.PriorityQueue;
  * <p>
  * 작성일 : 2023.06.22
  */
-public class P138477 {
+class P138477 {
     public LinkedList<Integer> solution(int k, int[] score) {
         LinkedList<Integer> answer = new LinkedList<>();
         LinkedList<Integer> ranking = new LinkedList<>();

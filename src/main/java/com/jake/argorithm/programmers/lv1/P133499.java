@@ -15,7 +15,7 @@ package com.jake.argorithm.programmers.lv1;
  * <p>
  * 작성일 : 2023.06.26
  */
-public class P133499 {
+class P133499 {
     public int solution(String[] babbling) {
         int answer = 0;
 

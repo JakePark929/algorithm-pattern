@@ -14,7 +14,7 @@ import java.util.Queue;
  *
  * 작성일 : 2023.06.20
  */
-public class P68935 {
+class P68935 {
     public int solution(int n) {
         StringBuffer sb = new StringBuffer();
         sb.append(Integer.toString(n, 3));

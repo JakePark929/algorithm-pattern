@@ -19,9 +19,9 @@ import java.util.regex.Pattern;
  * 숫자로만 이루어진 단어는 없습니다.
  * 공백문자가 연속해서 나올 수 있습니다.
  * <p>
- * 작성일 : 2023.07.06
+ * 작성일 : 2023.07.07
  */
-public class P12951 {
+class P12951 {
     public String solution(String s) {
         StringBuilder answer = new StringBuilder();
         char[] cs = s.toCharArray();

@@ -15,7 +15,7 @@ import java.util.Arrays;
  *
  * 작성일 : 2023.07.06
  */
-public class P12939 {
+class P12939 {
     public String solution(String s) {
         StringBuilder answer = new StringBuilder();
         int[] arr = Arrays.stream(s.split(" ")).mapToInt(Integer::parseInt).toArray();

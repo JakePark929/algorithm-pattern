@@ -27,7 +27,7 @@ import java.util.StringTokenizer;
  *
  * 작성일 : 2023.07.12
  */
-public class P1330_CompareTwoNumbers {
+class P1330_CompareTwoNumbers {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String str = br.readLine();

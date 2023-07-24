@@ -1,4 +1,4 @@
-package com.jake.argorithm.baekjoon.lv06_advanced;
+package com.jake.argorithm.baekjoon.lv06_advanced_1;
 
 import java.io.BufferedReader;
 import java.io.IOException;

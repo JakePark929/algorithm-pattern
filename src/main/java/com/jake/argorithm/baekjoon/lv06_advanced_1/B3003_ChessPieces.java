@@ -1,4 +1,4 @@
-package com.jake.argorithm.baekjoon.lv06_advanced;
+package com.jake.argorithm.baekjoon.lv06_advanced_1;
 
 /**
  * [ 킹, 퀸, 룩, 비숍, 나이트, 폰 ]

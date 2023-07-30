@@ -30,8 +30,11 @@ import java.util.Arrays;
  */
 class B1546_Average {
     static int read() throws Exception {
+        // 1. 한 바이트를 읽어 최하위 4비트로 초기화된 변수 n 할당
         int c, n = System.in.read() & 15;
+        // 2. 공백보다 큰 수인지 확인해 n 변수에 3제곱 2제곱 공백으로 더함
         while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
+        // 3. 캐리지 리턴(13) 이면 다음 바이트
         if (c == 13) System.in.read();
         return n;
     }

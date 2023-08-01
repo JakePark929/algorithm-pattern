@@ -74,6 +74,5 @@ class B1546_Average {
         }
 
         System.out.println(sum / max / N * 100);
-
     }
 }

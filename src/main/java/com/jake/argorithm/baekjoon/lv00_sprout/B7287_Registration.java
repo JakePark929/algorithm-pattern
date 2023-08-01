@@ -1,4 +1,4 @@
-package com.jake.argorithm.baekjoon.lv00_Sprout;
+package com.jake.argorithm.baekjoon.lv00_sprout;
 
 import java.io.BufferedReader;
 import java.io.IOException;

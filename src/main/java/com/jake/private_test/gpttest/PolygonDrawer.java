@@ -1,4 +1,4 @@
-package com.jake.privatetest.gpttest;
+package com.jake.private_test.gpttest;
 
 import java.awt.*;
 import java.util.Scanner;

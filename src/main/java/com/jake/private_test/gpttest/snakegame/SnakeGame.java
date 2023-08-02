@@ -1,4 +1,4 @@
-package com.jake.privatetest.gpttest.snakegame;
+package com.jake.private_test.gpttest.snakegame;
 
 import javax.swing.*;
 import java.awt.*;

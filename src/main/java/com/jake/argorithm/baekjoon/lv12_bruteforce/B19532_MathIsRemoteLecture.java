@@ -32,7 +32,19 @@ package com.jake.argorithm.baekjoon.lv12_bruteforce;
  * 작성일 : 2023.08.02
  */
 class B19532_MathIsRemoteLecture {
-    public static void main(String[] args) {
+    private static int read() throws Exception {
+        int c, n = System.in.read() & 15;
+        boolean isNegative = n == 13;
+        if (isNegative) n = System.in.read() & 15;
+        while ((c = System.in.read()) > 32) n = (n << 3) + (n << 1) + (c & 15);
+        return isNegative ? ~n + 1 : n;
+    }
 
+    public static void main(String[] args) throws Exception {
+        int a = read(), b = read(), c = read(), d = read(), e = read(), f = read();
+
+        StringBuilder sb = new StringBuilder().append((c * e - b * f) / (a * e - b * d)).append(" ").append((a * f - d * c) / (a * e - b * d));
+
+        System.out.println(sb);
     }
 }

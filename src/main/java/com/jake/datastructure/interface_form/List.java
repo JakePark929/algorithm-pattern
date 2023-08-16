@@ -61,7 +61,7 @@ public interface List<E> {
      * @param index index 리스트에 접근할 위치변수
      * @param value 새로 대체할 요소변수
      */
-    void set(int index, E value);
+    E set(int index, E value);
 
     /**
      * 리스트에 특정 요소가 리스트에 있는지 여부를 확인합니다.

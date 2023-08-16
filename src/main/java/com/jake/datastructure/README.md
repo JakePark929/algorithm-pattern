@@ -211,24 +211,24 @@ Integer, String, Double, Long 같은 Wrapper Class 부터
 */
 class Set {
     HashSet<T> hashset = new HashSet<>();
-    LinkedHashSet<T> linkedhashset = new LinkedHashSet<>();
-    TreeSet<T> treeset = new TreeSet<>();
+    LinkedHashSet<T> linkedHashSet = new LinkedHashSet<>();
+    TreeSet<T> treeSet = new TreeSet<>();
 
-    SortedSet<T> treeset = new TreeSet<>();
+    SortedSet<T> treeSet = new TreeSet<>();
 
     Set<T> hashset = new HashSet<>();
-    Set<T> linkedhashset = new LinkedHashSet<>();
-    Set<T> treeset = new TreeSet<>();
+    Set<T> linkedHashSet = new LinkedHashSet<>();
+    Set<T> treeSet = new TreeSet<>();
 }
 ```
 
 ---
 
 ## 자바 대표 컬렉션 11가지
-- ArrayList
+- ArrayList - **2023.08.09 ArrayList 구현 진행**
 - LinkedList
 - Vector
-- Stack - **2023.08.09 Stack Interface 구현 진행**
+- Stack 
 - Queue(by LinkedList)
 - PriorityQueue
 - Deque(by LinkedList)
@@ -326,8 +326,25 @@ ex) int 는 4 byte, Wrapper Class 인 Integer 는 32bit JVM 객체헤더 8 byte,
 - add() 메소드 구현
 - get(), set(), indexOf(), contains() 메소드 구현
 - remove() 메소드 구현
-- size, isEmpty, clear 메소드 구현
+- size(), isEmpty(), clear() 메소드 구현
 + clone(), toArray() 구현
+
+---
+
+## 230810 SinglyLinkedList Class 구현
+ArrayList 와는 다르게 노드라는 객체를 이용하여 연결.
+ArrayList 는 최상위 타입인 Object[] 배열을 사용하여 데이터 저장.
+LinkedList 는 하나의 객체를 두고 그안에 데이터와 다른 노드를 가리키는 레퍼런스 데이터를 구성 후
+여러 노드를 하나의 체인처럼 연결
+
+### 구현목록
+- 클래스 및 생성자 구성
+- search() 메소드 구현
+- add() 메소드 구현
+- get(), set(), indexOf(), contains() 메소드 구현
+- remove() 메소드 구현
+- size(), isEmpty(), clear() 메소드 구현
++ clone(), toArray(), sort() 구현
 
 ---
 

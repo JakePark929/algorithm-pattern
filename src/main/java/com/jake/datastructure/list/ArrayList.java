@@ -9,7 +9,7 @@ public class ArrayList<E> implements List<E>, Cloneable {
     private static final Object[] EMPTY_ARRAY = {}; // 빈 배열
 
     private int size; // 요소 개수
-    Object[] array; // 요소를 담을 배열
+    private Object[] array; // 요소를 담을 배열
 
     // 생성자 1 (초기 공간 할당 X)
     public ArrayList() {
@@ -29,6 +29,8 @@ public class ArrayList<E> implements List<E>, Cloneable {
         // 용량이 0 인 경우
         if (Arrays.equals(array, EMPTY_ARRAY)) {
             array = new Object[DEFAULT_CAPACITY];
+
+            return;
         }
 
         // 용량이 가득 찬 경우
@@ -37,6 +39,8 @@ public class ArrayList<E> implements List<E>, Cloneable {
 
             // copy
             array = Arrays.copyOf(array, newCapacity);
+
+            return;
         }
 
         // 용량의 절반 미만으로 요소가 차지하고 있을 경우
@@ -102,22 +106,22 @@ public class ArrayList<E> implements List<E>, Cloneable {
         return (E) array[index];
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public void set(int index, E value) {
+    public E set(int index, E value) {
         if (index >= size || index < 0) { // 범위를 벗어날 경우 예외 발생
             throw new IndexOutOfBoundsException();
         } else {
             // 해당 위치의 요소를 교체
             array[index] = value;
         }
+        return (E) array[index];
     }
 
     @Override
     public int indexOf(Object value) {
-        int i = 0;
-
         // value 와 같은 객체(요소 값)일 경우 i(위치) 반환
-        for (i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             if (array[i].equals(value)) {
                 return i;
             }
@@ -203,7 +207,7 @@ public class ArrayList<E> implements List<E>, Cloneable {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    public Object clone() throws CloneNotSupportedException {
         // 새로운 객체 생성
         ArrayList<?> cloneList = (ArrayList<?>) super.clone();
 
@@ -214,5 +218,39 @@ public class ArrayList<E> implements List<E>, Cloneable {
         System.arraycopy(array, 0, cloneList.array, 0, size);
 
         return cloneList;
+    }
+
+    public Object[] toArray() {
+        return Arrays.copyOf(array, size);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T[] toArray(T[] a) {
+        if (a.length < size) {
+            // copyOf(원본 배열, 복사할 길이, Class<? extends T[]> 타입)
+            return (T[]) Arrays.copyOf(array, size, a.getClass());
+        }
+        // 원본배열, 원본배열 시작위치, 복사할 배열, 복사할 배열 시작위치, 복사할 요소수
+        System.arraycopy(array, 0, a, 0, size);
+        return a;
+    }
+
+    @Override
+    public String toString() {
+        if (array == null)
+            return "null";
+
+        int iMax = size - 1;
+        if (iMax == -1)
+            return "[]";
+
+        StringBuilder b = new StringBuilder();
+        b.append('[');
+        for (int i = 0; ; i++) {
+            b.append(array[i]);
+            if (i == iMax)
+                return b.append(']').toString();
+            b.append(", ");
+        }
     }
 }

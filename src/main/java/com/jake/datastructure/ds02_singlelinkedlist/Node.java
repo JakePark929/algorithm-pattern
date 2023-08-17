@@ -1,4 +1,4 @@
-package com.jake.datastructure.list;
+package com.jake.datastructure.ds02_singlelinkedlist;
 
 class Node<E> {
     E data;

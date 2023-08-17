@@ -1,9 +1,14 @@
-package com.jake.datastructure.list;
+package com.jake.datastructure.ds01_arraylist;
 
 import com.jake.datastructure.interface_form.List;
 
 import java.util.Arrays;
 
+/**
+ * @param <E> the type of elements in this list
+ * @author jake_park
+ * @since 2023.08.09
+ */
 public class ArrayList<E> implements List<E>, Cloneable {
     private static final int DEFAULT_CAPACITY = 10; // 최소(기본) 용적 크기
     private static final Object[] EMPTY_ARRAY = {}; // 빈 배열
@@ -95,6 +100,44 @@ public class ArrayList<E> implements List<E>, Cloneable {
         add(0, value);
     }
 
+    @SuppressWarnings("unchecked")  // type safe 에 대한 경고 무시 (Object -> E type casting)
+    @Override
+    public E remove(int index) {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        E element = (E) array[index]; // 삭제될 요소를 반환하기 위해 임시로 담아둠
+        array[index] = null;
+
+        // 삭제한 요소의 뒤에 있는 모든 요소를 한 칸씩 당겨옴
+        for (int i = index; i < size - 1; i++) {
+            array[i] = array[i + 1];
+            array[i + 1] = null; // 명시적 요소를 null 로 처리해야 GC가 메모리를 수거해줌
+        }
+
+        size--;
+        resize();
+
+        return element;
+    }
+
+    @Override
+    public boolean remove(Object value) {
+        // 삭제하고자 하는 요소의 인덱스 찾기
+        int index = indexOf(value);
+
+        // -1 이라면 array 에 요소가 없다는 의미이므로 false 반환
+        if (index == -1) {
+            return false;
+        }
+
+        // index 위치에 있는 요소를 삭제
+        remove(index);
+
+        return true;
+    }
+
     @SuppressWarnings("unchecked") // type safe 에 대한 경고 무시 (Object -> E type casting)
     @Override
     public E get(int index) {
@@ -147,44 +190,6 @@ public class ArrayList<E> implements List<E>, Cloneable {
         return indexOf(value) >= 0;
     }
 
-    @SuppressWarnings("unchecked")  // type safe 에 대한 경고 무시 (Object -> E type casting)
-    @Override
-    public E remove(int index) {
-        if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        E element = (E) array[index]; // 삭제될 요소를 반환하기 위해 임시로 담아둠
-        array[index] = null;
-
-        // 삭제한 요소의 뒤에 있는 모든 요소를 한 칸씩 당겨옴
-        for (int i = index; i < size - 1; i++) {
-            array[i] = array[i + 1];
-            array[i + 1] = null; // 명시적 요소를 null 로 처리해야 GC가 메모리를 수거해줌
-        }
-
-        size--;
-        resize();
-
-        return element;
-    }
-
-    @Override
-    public boolean remove(Object value) {
-        // 삭제하고자 하는 요소의 인덱스 찾기
-        int index = indexOf(value);
-
-        // -1 이라면 array 에 요소가 없다는 의미이므로 false 반환
-        if (index == -1) {
-            return false;
-        }
-
-        // index 위치에 있는 요소를 삭제
-        remove(index);
-
-        return true;
-    }
-
     @Override
     public int size() {
         return size; // 요소 개수 반환
@@ -225,16 +230,18 @@ public class ArrayList<E> implements List<E>, Cloneable {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T[] toArray(T[] a) {
-        if (a.length < size) {
+    public <T> T[] toArray(T[] array) {
+        if (array.length < size) {
             // copyOf(원본 배열, 복사할 길이, Class<? extends T[]> 타입)
-            return (T[]) Arrays.copyOf(array, size, a.getClass());
+            return (T[]) Arrays.copyOf(this.array, size, array.getClass());
         }
         // 원본배열, 원본배열 시작위치, 복사할 배열, 복사할 배열 시작위치, 복사할 요소수
-        System.arraycopy(array, 0, a, 0, size);
-        return a;
+        System.arraycopy(this.array, 0, array, 0, size);
+        return array;
     }
 
+    // Object 클래스에 정의된 toString() 메소드는
+    // getClass().getName() + "@" + Integer.toHexString(hashCode());
     @Override
     public String toString() {
         if (array == null)

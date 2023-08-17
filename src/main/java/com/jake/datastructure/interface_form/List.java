@@ -64,15 +64,6 @@ public interface List<E> {
     E set(int index, E value);
 
     /**
-     * 리스트에 특정 요소가 리스트에 있는지 여부를 확인합니다.
-     *
-     * @param value 리스트에서 찾을 특정 요소변수
-     * @return 리스트에 특정 요소가 존재할 경우 {@code true}
-     *         존재하지 않을 경우 {@code false}를 반환
-     */
-    boolean contains(Object value);
-
-    /**
      * 리스트에 특정 요소가 몇 번째 위치에 있는지를 반환합니다.
      *
      * @param value 리스트에서 위치를 찾을 요소변수
@@ -80,6 +71,15 @@ public interface List<E> {
      *         만약 일치하는 요소가 없을 경우 -1 을 반환
      */
     int indexOf(Object value);
+
+    /**
+     * 리스트에 특정 요소가 리스트에 있는지 여부를 확인합니다.
+     *
+     * @param value 리스트에서 찾을 특정 요소변수
+     * @return 리스트에 특정 요소가 존재할 경우 {@code true}
+     *         존재하지 않을 경우 {@code false}를 반환
+     */
+    boolean contains(Object value);
 
     /**
      * 리스트에 있는 요소의 개수를 반환합니다.

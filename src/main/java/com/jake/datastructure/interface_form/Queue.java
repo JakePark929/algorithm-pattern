@@ -5,7 +5,7 @@ package com.jake.datastructure.interface_form;
  * <p>
  * QueueInterface 는 ArrayQueue, LinkedQueue, Deque, PriorityQueue 에 의해 구현됩니다.
  *
- * @param <E> the type of elements in this Stack
+ * @param <E> the type of elements in this Queue
  * @author jake_park
  * @version 1.0
  * @since 2023.08.16

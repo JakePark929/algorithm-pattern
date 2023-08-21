@@ -536,3 +536,16 @@ Object[] 배열을 사용하여 데이터를 관리.
 - peek() 메소드 구현
 - search(), isEmpty(), size(), clear() 메소드 구현
 - +) toArray(), clone(), sort() 구현
+- 
+## 230816 Linked List Queue Class 구현
+
+자바에서는 큐의 경우 LinkedList 로 구현한 큐가 쓰이는 만큼 대중적이고, 배열로 구현하는 큐에 비해 구현이 쉽다.
+
+### 구현목록
+
+- 클래스 및 생성자 구성
+- offer() 메소드 구현
+- poll() 메소드 구현
+- peek() 메소드 구현
+- search(), isEmpty(), contains(), clear() 메소드 구현
+- +) toArray(), clone(), sort() 구현

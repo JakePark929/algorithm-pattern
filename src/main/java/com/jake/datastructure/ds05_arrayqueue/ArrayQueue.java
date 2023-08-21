@@ -3,10 +3,17 @@ package com.jake.datastructure.ds05_arrayqueue;
 import com.jake.datastructure.interface_form.Queue;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 
+/**
+ * @param <E> the type of elements in this Queue
+ * @author jake_park
+ * @see Queue
+ * @since 2023.08.21
+ */
 public class ArrayQueue<E> implements Queue<E>, Cloneable {
-    private static final int DEFAULT_CAPACITY = 8; // 최소(기본) 용적 크기
+    private static final int DEFAULT_CAPACITY = 64; // 최소(기본) 용적 크기
 
     private Object[] array; // 요소를 담을 배열
     private int size; // 요소 개수
@@ -29,7 +36,7 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
         this.front = 0;
         this.rear = 0;
     }
-    
+
     private void resize(int newCapacity) {
         int arrayCapacity = array.length; // 현재 용적 크기
         Object[] newArray = new Object[newCapacity]; // 용적을 변경한 배열
@@ -42,7 +49,7 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
         for (int i = 1, j = front + 1; i <= size; i++, j++) {
             newArray[i] = array[j % arrayCapacity];
         }
-        
+
         this.array = newArray; // 새 배열을 기존 array 의 배열로 덮어 씌움
 
         front = 0;
@@ -157,7 +164,7 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T[]toArray(T[] a) {
+    public <T> T[] toArray(T[] a) {
         final T[] res;
 
         // 들어오는 배열의 길이가 큐의 요소 개수보다 작은 경우
@@ -202,8 +209,8 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
          *  ˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉ
          *    	f        r
          */
-        if(front <= rear) {
-            System.arraycopy(array, front + 1, array, 0, size);
+        if (front <= rear) {
+            System.arraycopy(array, front + 1, a, 0, size);
         } else {
             /*
              * front 가 rear 보다 뒤에 있을 경우
@@ -212,10 +219,10 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
              *  ˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉˉ
              *    	r        f
              */
-            int rearLength = array.length - 1 - front;	// 뒷 부분의 요소 개수
+            int rearLength = array.length - 1 - front;    // 뒷 부분의 요소 개수
 
             // 뒷 부분 복사
-            if(rearLength > 0) {
+            if (rearLength > 0) {
                 System.arraycopy(array, front + 1, a, 0, rearLength);
             }
             // 앞 부분 복사
@@ -236,17 +243,39 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
             // 새로운 큐의 배열도 생성해주어야 함 (내부 객체는 깊은 복사가 되지 않기 때문)
             clone.array = Arrays.copyOf(array, array.length);
             return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new Error(e);    // 예외처리는 여러분들이 자유롭게 구성하면 된다.
         }
-        catch(CloneNotSupportedException e) {
-            throw new Error(e);	// 예외처리는 여러분들이 자유롭게 구성하면 된다.
-        }
+    }
+
+    public void sort() {
+        /*
+         * Comparator 를 넘겨주지 않는 경우 해당 객체의 Comparable 에 구현된 정렬 방식을 사용한다.
+         * 만약 구현되어 있지 않으면 cannot be cast to class java.lang.Comparable 에러가 발생한다.
+         * 만약 구현되어 있을 경우 null 로 파라미터를 넘기면 Arrays.sort()가 객체의 compareTo 메소드에 정의된 방식대로 정렬한다.
+         */
+        sort(null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void sort(Comparator<? super E> c) {
+        // null 접근 방지를 위해 toArray 로 요소만 있는 배열을 얻어 이를 정렬한 뒤 덮어 씌운다.
+        Object[] res = toArray();
+        Arrays.sort((E[]) res, 0, size, c);
+
+        clear();
+
+        /*
+         * 정렬된 원소를 다시 array 에 0 부터 차례대로 채운다.
+         * 이 때 front = 0 인덱스는 비워야 하므로 1번째 인덱스부터 채워야 한다.
+         */
+        System.arraycopy(res, 0, array, 1, res.length);
+
+        this.rear = this.size = res.length;
     }
 
     @Override
     public String toString() {
-        System.out.println(Arrays.toString(array));
-        System.out.println(front + " : " + rear);
-
         if (array == null)
             return "null";
 

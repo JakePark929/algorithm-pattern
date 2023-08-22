@@ -2,6 +2,8 @@ package com.jake.datastructure;
 
 import com.jake.datastructure.ds05_arrayqueue.ArrayQueue;
 import com.jake.datastructure.ds06_linkedlistqueue.LinkedListQueue;
+import com.jake.datastructure.ds07_arraydeque.ArrayDeque;
+import com.jake.datastructure.ds08_linkedlistdeque.LinkedListDeque;
 
 public class QueueTestMain {
     static void arrayQueueTest() {
@@ -86,8 +88,43 @@ public class QueueTestMain {
         System.out.println(llq.peek());
         System.out.println(llq);
     }
+
+    static void arrayDequeTest() {
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
+
+        ad.offer(50);
+        ad.offer(30);
+        ad.offer(40);
+        System.out.println(ad);
+
+        ad.poll();
+        System.out.println(ad);
+
+        ad.pollLast();
+        System.out.println(ad);
+
+        ad.offerFirst(10);
+        ad.offerFirst(40);
+        System.out.println(ad);
+
+        ad.sort();
+        System.out.println(ad);
+        System.out.println(ad.size());
+    }
+
+    static void linkedListDequeTest() {
+        LinkedListDeque<Integer> lld = new LinkedListDeque<>();
+
+        lld.offer(50);
+        lld.offer(30);
+        lld.offer(40);
+        System.out.println(lld);
+    }
+
     public static void main(String[] args) {
 //        arrayQueueTest();
-        linkedListQueueTest();
+//        linkedListQueueTest();
+//        arrayDequeTest();
+        linkedListDequeTest();
     }
 }

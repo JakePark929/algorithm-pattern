@@ -26,8 +26,8 @@ public class LinkedListQueue<E> implements Queue<E>, Cloneable {
     }
 
     @Override
-    public boolean offer(E e) {
-        Node<E> newNode = new Node<>(e);
+    public boolean offer(E value) {
+        Node<E> newNode = new Node<>(value);
 
         // 비어있을 경우
         if (size == 0) {
@@ -138,7 +138,7 @@ public class LinkedListQueue<E> implements Queue<E>, Cloneable {
 
         int idx = 0;
         for (Node<E> x = head; x != null; x = x.next) {
-            array[idx++] = (E) x.data;
+            array[idx++] = x.data;
         }
 
         return array;

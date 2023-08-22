@@ -76,12 +76,12 @@ public class DoubleLinkedList<E> implements List<E>, Cloneable {
     }
 
     public void addLast(E value) {
-        Node<E> newNode = new Node<>(value); // 새 노드 생성
-
         if (size == 0) { // 처음 넣는 노드일 경우 addFirst 로 추가
             addFirst(value);
             return;
         }
+
+        Node<E> newNode = new Node<>(value); // 새 노드 생성
 
         /*
          * 마지막 노드(tail)의 다음 노드(next)가 새 노드를 가리키도록 하고

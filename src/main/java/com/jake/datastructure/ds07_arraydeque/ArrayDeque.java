@@ -1,4 +1,4 @@
-package com.jake.datastructure.ds05_arrayqueue;
+package com.jake.datastructure.ds07_arraydeque;
 
 import com.jake.datastructure.interface_form.Queue;
 
@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
  * @see Queue
  * @since 2023.08.21
  */
-public class ArrayQueue<E> implements Queue<E>, Cloneable {
+public class ArrayDeque<E> implements Queue<E>, Cloneable {
     private static final int DEFAULT_CAPACITY = 64; // 최소(기본) 용적 크기
 
     private Object[] array; // 요소를 담을 배열
@@ -22,7 +22,7 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
     private int rear; // 마지막 요소의 인덱스를 가리키는 변수
 
     // 생성자 1 (초기 용적 할당 안할 경우)
-    public ArrayQueue() {
+    public ArrayDeque() {
         this.array = new Object[DEFAULT_CAPACITY];
         this.size = 0;
         this.front = 0;
@@ -30,7 +30,7 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
     }
 
     // 생성자 2 (초기 용적 할당 할 경우)
-    public ArrayQueue(int capacity) {
+    public ArrayDeque(int capacity) {
         this.array = new Object[capacity];
         this.size = 0;
         this.front = 0;
@@ -58,6 +58,10 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
 
     @Override
     public boolean offer(E value) {
+        return offerLast(value);
+    }
+
+    public boolean offerLast(E value) {
         // 용적이 가득 찼을 경우
         if ((rear + 1) % array.length == front) {
             resize(array.length * 2); // 용적을 두 배 늘려준다.
@@ -71,8 +75,26 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
         return true;
     }
 
+    public boolean offerFirst(E value) {
+        // 용적이 가득 찼을 경우
+        if ((front - 1 + array.length) % array.length == rear) {
+            resize(array.length * 2);
+        }
+
+        array[front] = value; // front 위치는 빈 공간이기 때문에 추가 해준뒤 front 값을 갱신한다.
+
+        front = (front - 1 + array.length) % array.length;
+        size++; // 사이즈 1 증가
+
+        return true;
+    }
+
     @Override
     public E poll() {
+        return pollFist();
+    }
+
+    public E pollFist() {
         if (size == 0) { // 삭제할 요소가 없을 경우 null 반환
             return null;
         }
@@ -95,7 +117,43 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
     }
 
     public E remove() {
-        E element = poll();
+        return removeFirst(); // 예외는 removeFirst() 에서 던져준다.
+    }
+
+    public E removeFirst() {
+        E element = pollFist(); // pollFirst() 를 호출한다.
+
+        if (element == null) {
+            throw new NoSuchElementException();
+        }
+
+        return element;
+    }
+
+    public E pollLast() {
+        if (size == 0) { // 삭제할 요소가 없을 경우 null 반환
+            return null;
+        }
+
+        @SuppressWarnings("unchecked")
+        E element = (E) array[rear]; // 반환할 데이터 임시 저장
+
+        array[rear] = null; // 해당 rear 의 데이터 삭제
+
+
+        rear = (rear - 1 + array.length) % array.length; // rear 를 한 칸 옮긴다.
+        size--; // 사이즈 감소
+
+        if (array.length > DEFAULT_CAPACITY && size < (array.length / 4)) {
+            // 아무리 작아도 최소 용적 미만으로 줄어들지 않도록 한다.
+            resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        }
+
+        return element;
+    }
+
+    public E removeLast() {
+        E element = pollLast();
 
         if (element == null) {
             throw new NoSuchElementException();
@@ -106,6 +164,10 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
 
     @Override
     public E peek() {
+        return peekFirst();
+    }
+
+    public E peekFirst() {
         // 요소가 없을 경우 null 반환
         if (size == 0) {
             return null;
@@ -117,9 +179,37 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
         return element;
     }
 
+    public E peekLast() {
+        // 요소가 없을 경우 null 반환
+        if (size == 0) {
+            return null;
+        }
+
+        @SuppressWarnings("unchecked")
+        E element = (E)array[(rear)];
+
+        return element;
+    }
+
     public E element() {
+        return getFirst();
+    }
+
+    public E getFirst() {
         E element = peek();
 
+        // 앞의 원소가 null 이라면 (size = 0) 예외를 던진다.
+        if (element == null) {
+            throw new NoSuchElementException();
+        }
+
+        return element;
+    }
+
+    public E getLast() {
+        E element = peekLast();
+
+        // 앞의 원소가 null 이라면 (size = 0) 예외를 던진다.
         if (element == null) {
             throw new NoSuchElementException();
         }
@@ -238,7 +328,7 @@ public class ArrayQueue<E> implements Queue<E>, Cloneable {
         try {
 
             @SuppressWarnings("unchecked")
-            ArrayQueue<E> clone = (ArrayQueue<E>) super.clone();// 새로운 큐 객체 생성
+            ArrayDeque<E> clone = (ArrayDeque<E>) super.clone();// 새로운 큐 객체 생성
 
             // 새로운 큐의 배열도 생성해주어야 함 (내부 객체는 깊은 복사가 되지 않기 때문)
             clone.array = Arrays.copyOf(array, array.length);

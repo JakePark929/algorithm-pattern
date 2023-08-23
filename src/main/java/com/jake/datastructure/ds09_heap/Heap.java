@@ -1,6 +1,7 @@
 package com.jake.datastructure.ds09_heap;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 
 public class Heap<E> {
     private final Comparator<? super E> comparator;
@@ -35,7 +36,6 @@ public class Heap<E> {
     }
 
     /**
-     *
      * @param newCapacity 새로운 용적 크기
      */
     private void resize(int newCapacity) {
@@ -65,11 +65,10 @@ public class Heap<E> {
         size++;
     }
 
-    // 상향 선별
-
     /**
+     * [ 상향 선별 ]
      *
-     * @param idx 추가할 노드의 인덱스
+     * @param idx    추가할 노드의 인덱스
      * @param target 재배치 할 노드
      */
     private void siftUp(int idx, E target) {
@@ -126,12 +125,118 @@ public class Heap<E> {
         array[idx] = comp;
     }
 
-    private void siftDown(int idx, E target) {
-        // comparator 가 존재한 경우 comparator 를 인자로 넘겨준다.
+    @SuppressWarnings("unchecked")
+    public E remove() {
+        if (array[1] == null) { // 만약 root 가 비어있을 경우 예외를 던지도록 함
+            throw new NoSuchElementException();
+        }
 
+        E result = (E) array[1]; // 삭제된 요소를 반환하기 위한 임시 변수
+        E target = (E) array[size]; // 타겟이 될 요소
+        array[size] = null; // 타겟 노드를 비운다.
+
+        // 삭제할 노드의 인덱스와 이후 재배치 할 타겟 노드를 넘겨준다.
+        siftDown(1, target); // 루트 노드가 삭제되므로 1을 넘겨준다.
+
+        return result;
     }
 
-    private void siftDownComparator(int idx, E target, Comparator<? super  E> comp) {
+    /**
+     * [ 하향 선별 ]
+     *
+     * @param idx    삭제할 노드의 인덱스
+     * @param target 재배치 할 노드
+     */
+    private void siftDown(int idx, E target) {
+        // comparator 가 존재한 경우 comparator 를 인자로 넘겨준다.
+        if (comparator != null) {
+            siftDownComparator(idx, target, comparator);
+        } else {
+            siftDownComparable(idx, target);
+        }
+    }
 
+    // Comparator 를 이용한 sift-down
+    @SuppressWarnings("unchecked")
+    private void siftDownComparator(int idx, E target, Comparator<? super E> comp) {
+        array[idx] = null; // 삭제할 인덱스의 노드를 삭제
+        size--;
+
+        int parentIdx = idx; // 삭제 노드부터 시작할 부모를 가리키는 변수
+        int childIdx; // 교환될 자식을 가리키는 변수
+
+        while ((childIdx = getLeftChild(parentIdx)) <= size) {
+            // 왼쪽 자식 노드의 인덱스가 요소의 개수보다 작을 때 까지 반복
+            int rightIdx = getRightChild(parentIdx); // 오른쪽 자식 인덱스
+            Object childVal = array[childIdx]; // 왼쪽 자식의 값(교환될 값)
+
+            /*
+             * 오른쪽 자식 인덱스가 size 를 넘지 않으면서
+             * 왼쪽 자식이 오른쪽 자식보다 큰 경우
+             * 재배치 할 노드는 작은 자식과 비교해야 하므로
+             * childIdx 와 childVal 을 오른쪽 자식으로 바꿔 준다.
+             */
+            if (rightIdx <= size && comp.compare((E) childVal, (E) array[rightIdx]) > 0) {
+                childIdx = rightIdx;
+                childVal = array[childIdx];
+            }
+
+            // 재배치 할 노드가 자식 노드보다 작을 경우 반복문을 종료한다.
+            if (comp.compare(target, (E) childVal) <= 0) {
+                break;
+            }
+
+            /*
+             * 현재 부모 인덱스에 자식 노드 값을 대체해주고
+             * 부모 인덱스를 자식 인덱스로 교체
+             */
+            array[parentIdx] = childVal;
+            parentIdx = childIdx;
+        }
+
+        // 최종적으로 재배치 되는 위치에 타겟이 된 값을 넣어 준다.
+        array[parentIdx] = target;
+
+        /*
+         * 용적의 사이즈가 최소 용적보다는 크면서 요소의 개수가 전체 용적의 1/4 일 경우
+         * 용적을 반으로 줄임 (단, 최소 용적보단 커야함)
+         */
+        if (array.length > DEFAULT_CAPACITY && size < array.length / 4) {
+            resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        }
+    }
+
+    // Comparable 을 이용한 sift-down
+    @SuppressWarnings("unchecked")
+    private void siftDownComparable(int idx, E target) {
+        Comparable<? super E> comp = (Comparable<? super E>) target;
+        array[idx] = null;
+        size--;
+
+        int parentIdx = idx;
+        int childIdx;
+
+        while ((childIdx = getLeftChild(parentIdx)) <= size) {
+            int rightIdx = getRightChild(parentIdx);
+            Object childVal = array[childIdx];
+
+            if (rightIdx <= size && ((Comparable<? super E>) childVal).compareTo((E) array[rightIdx]) > 0) {
+                childIdx = rightIdx;
+                childVal = array[childIdx];
+            }
+
+            if (comp.compareTo((E) childVal) <= 0) {
+                break;
+            }
+
+            array[parentIdx] = childVal;
+            parentIdx = childIdx;
+        }
+
+        array[parentIdx] = comp;
+
+        if (array.length > DEFAULT_CAPACITY && size < array.length / 4) {
+            resize(Math.max(DEFAULT_CAPACITY, array.length / 2));
+        }
     }
 }

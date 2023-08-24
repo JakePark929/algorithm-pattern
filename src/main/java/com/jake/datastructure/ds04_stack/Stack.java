@@ -8,7 +8,7 @@ import java.util.EmptyStackException;
 
 /**
  * @param <E> the type of elements in this list
- * @author JakePark
+ * @author jake_park
  */
 public class Stack<E> implements StackInterface<E>, Cloneable {
     private static final int DEFAULT_CAPACITY = 10; // 최소(기본) 용적 크기

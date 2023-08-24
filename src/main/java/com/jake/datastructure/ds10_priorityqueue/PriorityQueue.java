@@ -1,28 +1,37 @@
-package com.jake.datastructure.ds09_heap;
+package com.jake.datastructure.ds10_priorityqueue;
+
+import com.jake.datastructure.interface_form.Queue;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 
-/**
- * @param <E> the type of element in this Heap
- * @author jake_park
- * @since 2023.08.23
- */
-public class Heap<E> {
+public class PriorityQueue<E> implements Queue<E>, Cloneable {
     private final Comparator<? super E> comparator;
     private static final int DEFAULT_CAPACITY = 10; // 최소(기본) 용적 크기
 
     private Object[] array; // 요소를 담을 배열
     private int size; // 요소 개수
 
-    public Heap() {
+    // 생성자 Type 1 (초기 공간 할당 X)
+    public PriorityQueue() {
         this(null);
     }
 
-    public Heap(Comparator<? super E> comparator) {
+    public PriorityQueue(Comparator<? super E> comparator) {
         this.comparator = comparator;
         this.array = new Object[DEFAULT_CAPACITY];
+        this.size = 0;
+    }
+
+    // 성성자 Type 2 (초기 공간 할당 O)
+    public PriorityQueue(int capacity) {
+        this(capacity, null);
+    }
+
+    public PriorityQueue(int capacity, Comparator<? super E> comparator) {
+        this.comparator = comparator;
+        this.array = new Object[capacity];
         this.size = 0;
     }
 
@@ -61,7 +70,8 @@ public class Heap<E> {
         this.array = newArray;
     }
 
-    public void add(E value) {
+    @Override
+    public boolean offer(E value) {
         // 배열의 용적이 꽉 차있을 경우 용적을 두 배로 늘려준다.
         if (size + 1 == array.length) {
             resize(array.length * 2);
@@ -69,6 +79,8 @@ public class Heap<E> {
 
         siftUp(size + 1, value); // 가장 마지막에 추가되는 위치와 넣을 값(타겟)을 넘겨줌
         size++;
+
+        return true;
     }
 
     /**
@@ -131,6 +143,17 @@ public class Heap<E> {
         array[idx] = comp;
     }
 
+    @Override
+    public E poll() {
+        // poll 은 뽑으려는 요소가(root) 가 null 일 경우 null 을 반환한다.
+        if (array[1] == null) {
+            return null;
+        }
+
+        // 그외의 경우 remove() 에서 반환되는 요소를 반환한다.
+        return remove();
+    }
+
     @SuppressWarnings("unchecked")
     public E remove() {
         if (array[1] == null) { // 만약 root 가 비어있을 경우 예외를 던지도록 함
@@ -147,6 +170,7 @@ public class Heap<E> {
 
         E target = (E) array[size]; // 타겟이 될 요소
         array[size] = null; // 타겟 노드를 비운다.
+        size--; // 사이즈를 1 감소
 
         // 삭제할 노드의 인덱스와 이후 재배치 할 타겟 노드를 넘겨준다.
         siftDown(1, target); // 루트 노드가 삭제되므로 1을 넘겨준다.
@@ -173,7 +197,6 @@ public class Heap<E> {
     @SuppressWarnings("unchecked")
     private void siftDownComparator(int idx, E target, Comparator<? super E> comp) {
         array[idx] = null; // 삭제할 인덱스의 노드를 삭제
-        size--;
 
         int parentIdx = idx; // 삭제 노드부터 시작할 부모를 가리키는 변수
         int childIdx; // 교환될 자식을 가리키는 변수
@@ -224,13 +247,12 @@ public class Heap<E> {
     private void siftDownComparable(int idx, E target) {
         Comparable<? super E> comp = (Comparable<? super E>) target;
         array[idx] = null;
-        size--;
 
         int parentIdx = idx;
         int childIdx;
 
-        while ((childIdx = getLeftChild(parentIdx)) <= size) {
-            int rightIdx = getRightChild(parentIdx);
+        while ((childIdx = (parentIdx << 1)) <= size) {
+            int rightIdx = childIdx + 1;
             Object childVal = array[childIdx];
 
             if (rightIdx <= size && ((Comparable<? super E>) childVal).compareTo((E) array[rightIdx]) > 0) {
@@ -245,6 +267,7 @@ public class Heap<E> {
             array[parentIdx] = childVal;
             parentIdx = childIdx;
         }
+
         array[parentIdx] = comp;
 
         if (array.length > DEFAULT_CAPACITY && size < array.length / 4) {
@@ -256,9 +279,10 @@ public class Heap<E> {
         return this.size;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public E peek() {
-        if (array[1] == null) {
+        if (array[1] == null) { // root 요소가 null 일 경우 예외 던짐
             throw new NoSuchElementException();
         }
 
@@ -269,14 +293,58 @@ public class Heap<E> {
         return size == 0;
     }
 
+    public boolean contains(Object value) {
+        for (int i = 1; i <= size; i++) {
+            if (array[i].equals(value)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void clear() {
+        for (int i = 0; i < array.length; i++) {
+            array[i] = null;
+        }
+
+        size = 0;
+    }
+
     public Object[] toArray() {
-        return Arrays.copyOf(array, size + 1);
+        return toArray(new Object[size]);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T[] toArray(T[] array) {
+        if (array.length <= size) {
+            // copyOf(원본 배열, 복사할 길이, Class<? extends T[]> 타입)
+            return (T[]) Arrays.copyOfRange(this.array, 1, size + 1, array.getClass());
+        }
+        // 원본배열, 원본배열 시작위치, 복사할 배열, 복사할 배열 시작위치, 복사할 요소수
+        System.arraycopy(this.array, 1, array, 0, size);
+
+        return array;
+    }
+
+    @Override
+    public Object clone() {
+        // super.clone() 은 CloneNotSupportedException 예외를 처리해 주어야 한다.
+        try {
+            PriorityQueue<?> cloneHeap = (PriorityQueue<?>) super.clone();
+            cloneHeap.array = new Object[size + 1];
+
+            // 단순히 clone() 만 한다고 내부 데이터까지 깊은 복사가 되는 것이 아니므로 내부 데이터들도 모두 복사해준다.
+            System.arraycopy(array, 0, cloneHeap.array, 0, size + 1);
+
+            return cloneHeap;
+        } catch (CloneNotSupportedException e) {
+            throw new Error(e);
+        }
     }
 
     @Override
     public String toString() {
-        System.out.println(Arrays.toString(array));
-
         if (array == null)
             return "null";
 

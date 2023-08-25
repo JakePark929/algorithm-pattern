@@ -1,4 +1,4 @@
-package com.jake.argorithm.baekjoon.lv16_Stack_Queue_Deque;
+package com.jake.argorithm.baekjoon.lv16_stack_queue_deque;
 
 import java.util.Stack;
 

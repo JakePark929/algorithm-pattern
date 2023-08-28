@@ -190,10 +190,12 @@ class B24511_QueueStack {
         Deque<Integer> dq = new ArrayDeque<>();
         int n1 = read();
         boolean chkS[] = new boolean[n1 + 1];
+
         for (int i = 1; i <= n1; i++) if (read() == 1) chkS[i] = true;
         for (int i = 1; i <= n1; i++)
             if (!chkS[i]) dq.offerLast(read());
             else read();
+
         int n2 = read();
         for (int i = 0; i < n2; i++) {
             dq.offerFirst(read());

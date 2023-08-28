@@ -16,6 +16,25 @@ public class MathUtils {
     public static int getLCM(int a, int b) {
         return (a * b) / getGCD(a, b);
     }
+    
+    // 팩토리얼 재귀함수
+    private static int factorial(int n) {
+        // factorial(0) == 1 이다.
+        if (n <= 1) {
+            return 1;
+        }
+
+        return n * factorial(n - 1);
+    }
+    
+    // 조합 수
+    private static int combination(int n, int r) {
+        if (n == r || r == 0) {
+            return 1;
+        }
+
+        return combination(n - 1, r - 1) + combination(n - 1, r);
+    }
 
     public static void main(String[] args) {
         int a = 36;

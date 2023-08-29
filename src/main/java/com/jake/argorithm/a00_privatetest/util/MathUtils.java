@@ -36,6 +36,13 @@ public class MathUtils {
         return combination(n - 1, r - 1) + combination(n - 1, r);
     }
 
+    // 피보나치 수
+    private static int fibonacci(int n) {
+        if (n == 0)	return 0;
+        if (n == 1)	return 1;
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+
     public static void main(String[] args) {
         int a = 36;
         int b = 48;

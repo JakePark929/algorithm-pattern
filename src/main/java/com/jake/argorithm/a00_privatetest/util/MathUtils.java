@@ -19,7 +19,7 @@ public class MathUtils {
     
     // 팩토리얼 재귀함수
     private static int factorial(int n) {
-        // factorial(0) == 1 이다.
+        // factorial(0) == 1
         if (n <= 1) {
             return 1;
         }

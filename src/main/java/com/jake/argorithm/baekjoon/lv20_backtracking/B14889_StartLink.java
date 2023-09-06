@@ -145,6 +145,7 @@ class B14889_StartLink {
         int total = 0;
         r = new int[n1];
         l = new int[n1];
+
         for (int i = 0; i < n1; i++) {
             stz = new StringTokenizer(br.readLine());
             for (int j = 0; j < n1; j++) {
@@ -154,6 +155,7 @@ class B14889_StartLink {
                 l[j] += t;
             }
         }
+
         match(1, 1, total - r[0] - l[0]);
         System.out.println(ans);
     }
@@ -163,9 +165,11 @@ class B14889_StartLink {
             ans = Math.min(ans, Math.abs(current));
             return;
         }
+
         if (x == n1) {
             return;
         }
+
         match(x + 1, count + 1, current - r[x] - l[x]);
         match(x + 1, count, current);
     }

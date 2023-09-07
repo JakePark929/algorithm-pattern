@@ -3,7 +3,6 @@ package com.jake.argorithm.baekjoon.lv21_dynamicprogramming;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 /**
  * [ 계단 오르기 ]

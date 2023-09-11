@@ -15,7 +15,7 @@ package com.jake.argorithm.baekjoon.lv22_prefixsum;
  * 출력
  * 총 M개의 줄에 입력으로 주어진 i번째 수부터 j번째 수까지 합을 출력한다.
  */
-class B11659_GetBoundarySum_4 {
+class B11659_GetPrefixSum_4 {
     public static void main(String[] args) throws Exception {
         int n = read();
         int m = read();

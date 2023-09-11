@@ -1,5 +1,6 @@
 package com.jake.argorithm.baekjoon.lv22_prefixsum;
 
+import java.io.Reader;
 import java.util.Arrays;
 
 /**
@@ -68,7 +69,7 @@ class B2559_Sequence {
 
     // 다른 사람의 풀이 1
     static public void main1(String[] args) throws Exception{
-        Reader in = new Reader();
+        Reader1 in = new Reader1();
         int n = in.nextInt();
         int k = in.nextInt();
         int[] data = new int[n + 1];
@@ -83,7 +84,7 @@ class B2559_Sequence {
     }
 }
 
-class Reader {
+class Reader1 {
     final int SIZE = 1 << 13;
     byte[] buffer = new byte[SIZE];
     int index, size;

@@ -3,6 +3,11 @@ package com.jake.argorithm.codility.lessons;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+/**
+ * [ CyclicRotation ]
+ *
+ * 작성일 : 24.10.04
+ */
 public class L2_CyclicRotation {
     public int[] solution(int[] A, int K) {
         LinkedList<Integer> queue = new LinkedList<>();

@@ -18,6 +18,8 @@ public class P0_Template {
 
     public static void main(String[] args) {
         input();
+
+        System.out.println(sb.toString());
     }
 
     static class FastReader {

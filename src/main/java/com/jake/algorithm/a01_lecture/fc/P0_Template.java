@@ -11,9 +11,9 @@ import java.util.StringTokenizer;
 
 public class P0_Template {
     static StringBuilder sb = new StringBuilder();
+    static FastReader scan = new FastReader();
 
     static void input() {
-        FastReader scan = new FastReader();
     }
 
     public static void main(String[] args) {

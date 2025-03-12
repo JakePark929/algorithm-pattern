@@ -50,31 +50,26 @@ public class P1_B9663_NQueen {
         return false;
     }
 
-    static boolean validityCheck() {
-        for (int i = 1; i <= N; i++) {
-            // (i, col[i])
-            for (int j = 1; j < i; j++) {
-                // (j, col[j])
-                if (attackable(i, col[i], j, col[j])) {
-
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
     static void recurrence(int row) {
         if (row == N + 1) {
-            if (validityCheck()) {
-                ans++;
-            }
+            ans++;
         } else {
             for (int c = 1; c <= N; c++) {
-                col[row] = c;
-                recurrence(row + 1);
-                col[row] = 0;
+                // valid check (row, col)
+                boolean possible = true;
+                for (int i = 1; i <= row - 1; i++) {
+                    // (i, col[i])
+                    if (attackable(row, c, i, col[i])) {
+                        possible = false;
+
+                        break;
+                    }
+                }
+                if (possible) {
+                    col[row] = c;
+                    recurrence(row + 1);
+                    col[row] = 0;
+                }
             }
         }
     }

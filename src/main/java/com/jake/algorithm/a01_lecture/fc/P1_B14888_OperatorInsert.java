@@ -115,10 +115,46 @@ public class P1_B14888_OperatorInsert {
         }
     }
 
+    // 피연산자 2개와 연산자가 주어졌을 때 계산해주는 함수
+    static int calculatorAdvance(int operand1, int operator, int operand2) {
+        if (operator == 1) {
+
+            return operand1 + operand2;
+        } else if (operator == 2) {
+
+            return operand1 - operand2;
+        } else if (operator == 3) {
+
+            return operand1 * operand2;
+        } else {
+
+            return operand1 / operand2;
+        }
+    }
+
+    static void recurrenceAdvance(int k, int value) {
+        if (k == N) {  // 모든 연산자들을 전부 나열하는 방법을 찾은 상태
+            max = Math.max(max, value);
+            min = Math.min(min, value);
+        }  else {  // k 번째 연산자는 무엇을 선택할 것인가
+            // 4가지의 연산자들 중에 뭘 쓸 것인지 선택하고 재귀호출하기
+            for (int candidate = 1; candidate <= 4; candidate++) {
+                if (operators[candidate] >= 1) {
+                    operators[candidate]--;
+                    order[k] = candidate;
+                    int newValue = calculatorAdvance(value, candidate, nums[k + 1]);
+                    recurrenceAdvance(k + 1, newValue);
+                    operators[candidate]++;
+                    order[k] = candidate;
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         input();
 
-        recurrence(1);
+        recurrenceAdvance(1, nums[1]);
 
         sb.append(max).append("\n").append(min);
         System.out.println(sb.toString());

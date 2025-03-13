@@ -10,8 +10,8 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class P0_Template {
-    static StringBuilder sb = new StringBuilder();
     static FastReader scan = new FastReader();
+    static StringBuilder sb = new StringBuilder();
 
     static void input() {
     }

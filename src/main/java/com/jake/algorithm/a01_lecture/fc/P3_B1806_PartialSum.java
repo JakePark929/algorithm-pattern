@@ -1,0 +1,96 @@
+package com.jake.algorithm.a01_lecture.fc;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+/**
+ * [ 부분 합 ]
+ *
+ * 문제
+ * 10,000 이하의 자연수로 이루어진 길이 N짜리 수열이 주어진다.
+ * 이 수열에서 연속된 수들의 부분합 중에 그 합이 S 이상이 되는 것 중,
+ * 가장 짧은 것의 길이를 구하는 프로그램을 작성하시오.
+ *
+ * 입력
+ * 첫째 줄에 N (10 ≤ N < 100,000)과 S (0 < S ≤ 100,000,000)가 주어진다.
+ * 둘째 줄에는 수열이 주어진다. 수열의 각 원소는 공백으로 구분되어져 있으며, 10,000이하의 자연수이다.
+ *
+ * 출력
+ * 첫째 줄에 구하고자 하는 최소의 길이를 출력한다. 만일 그러한 합을 만드는 것이 불가능하다면 0을 출력하면 된다.
+ *
+ * 작성일 : 2026.03.02
+ */
+public class P3_B1806_PartialSum {
+    static FastReader scan = new FastReader();
+
+    static int n, S;
+    static int[] a;
+
+    static void input() {
+        n = scan.nextInt();
+        S = scan.nextInt();
+        a = new int[n + 1];
+
+        for (int i = 1; i <= n; i++) {
+            a[i] = scan.nextInt();
+        }
+    }
+
+    static void process() {
+        int R = 0, sum = 0, answer = n + 1;
+
+        for (int L = 1; L <= n; L++) {
+            // L = 1 을 구간에서 제외하기
+            sum -= a[L - 1];
+
+            // R 을 옮길 수 있을 때 까지 옮기기
+            while (R + 1 <= n && sum < S) {
+                R++;
+                sum += a[R];
+            }
+            // [L..R]의 합, 즉 sum 이 조건을 만족하면 정답 갱신하기
+            if (sum >= S) {
+                answer = Math.min(answer, R - L + 1);
+            }
+        }
+
+        // answer 값을 보고 불가능 판단하기
+        if (answer == n + 1) {
+            answer = 0;
+        }
+
+        System.out.println(answer);
+    }
+
+    public static void main(String[] args) {
+        input();
+
+        process();
+    }
+
+    static class FastReader {
+        BufferedReader br;
+        StringTokenizer st;
+
+        public FastReader() {
+            br = new BufferedReader(new InputStreamReader(System.in));
+        }
+
+        String next() {
+            while (st == null || !st.hasMoreElements()) {
+                try {
+                    st = new StringTokenizer(br.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return st.nextToken();
+        }
+
+        int nextInt() {
+            return Integer.parseInt(next());
+        }
+    }
+}

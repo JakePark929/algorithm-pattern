@@ -3,6 +3,8 @@ package com.jake.algorithm.a01_lecture.fc;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -31,19 +33,27 @@ public class P4_B1260_DFS_BFS {
     static StringBuilder sb = new StringBuilder();
 
     static int N, M, V;
-    static int[][] adj;
+    static ArrayList<Integer>[] adj;
     static boolean[] visit;
 
     static void input() {
         N = scan.nextInt();
         M = scan.nextInt();
         V = scan.nextInt();
-        adj = new int[N + 1][N + 1];
+        adj = new ArrayList[N + 1];
+
+        for (int i = 1; i <= N; i++) {
+            adj[i] = new ArrayList<>();
+        }
 
         for (int i = 1; i <= M; i++) {
             int x = scan.nextInt(), y = scan.nextInt();
-            adj[x][y] = 1;
-            adj[y][x] = 1;
+            adj[x].add(y);
+            adj[y].add(x);
+        }
+
+        for (int i = 1; i <= N; i++) {
+            Collections.sort(adj[i]);
         }
     }
 
@@ -51,11 +61,7 @@ public class P4_B1260_DFS_BFS {
         visit[x] = true;
         sb.append(x).append(" ");
 
-        for (int y = 1; y <= N; y++) {
-            if (adj[x][y] == 0) {
-                continue;
-            }
-
+        for (int y : adj[x]) {
             if (visit[y]) {
                 continue;
             }
@@ -73,11 +79,8 @@ public class P4_B1260_DFS_BFS {
         while (!queue.isEmpty()) {
             x = queue.poll();
             sb.append(x).append(" ");
-            for (int y = 1; y <= N; y++) {
-                if (adj[x][y] == 0) {
-                    continue;
-                }
 
+            for (int y : adj[x]) {
                 if (visit[y]) {
                     continue;
                 }

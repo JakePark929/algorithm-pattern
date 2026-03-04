@@ -83,7 +83,7 @@ public class P3_B16472_Meow {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

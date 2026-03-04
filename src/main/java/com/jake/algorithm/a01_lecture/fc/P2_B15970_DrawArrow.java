@@ -117,7 +117,7 @@ public class P2_B15970_DrawArrow {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

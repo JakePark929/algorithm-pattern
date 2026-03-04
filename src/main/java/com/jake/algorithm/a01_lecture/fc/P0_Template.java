@@ -22,7 +22,7 @@ public class P0_Template {
         System.out.println(sb.toString());
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

@@ -71,7 +71,7 @@ public class P2_B11652_Card {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

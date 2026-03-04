@@ -83,7 +83,7 @@ public class P2_B1015_SortSequence {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

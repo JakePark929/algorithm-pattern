@@ -82,7 +82,7 @@ public class P1_B9663_NQueen {
         System.out.println(ans);
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

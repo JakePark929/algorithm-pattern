@@ -109,7 +109,7 @@ public class P3_B2470_Two_Solution {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

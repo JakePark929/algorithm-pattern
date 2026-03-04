@@ -66,7 +66,7 @@ public class P1_B15652_NAndM_4 {
         System.out.println(sb.toString());
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

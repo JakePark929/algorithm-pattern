@@ -65,7 +65,7 @@ public class P3_B13144_ListOfUniqueNumber {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

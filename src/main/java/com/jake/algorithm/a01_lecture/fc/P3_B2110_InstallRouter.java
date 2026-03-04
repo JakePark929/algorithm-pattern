@@ -86,7 +86,7 @@ public class P3_B2110_InstallRouter {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

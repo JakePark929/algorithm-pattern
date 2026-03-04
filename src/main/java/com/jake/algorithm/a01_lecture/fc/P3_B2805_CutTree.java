@@ -85,7 +85,7 @@ public class P3_B2805_CutTree {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

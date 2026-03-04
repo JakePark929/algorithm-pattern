@@ -87,7 +87,7 @@ public class P3_B1253_Good {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

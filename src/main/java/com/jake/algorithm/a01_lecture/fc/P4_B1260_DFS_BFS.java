@@ -111,7 +111,7 @@ public class P4_B1260_DFS_BFS {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

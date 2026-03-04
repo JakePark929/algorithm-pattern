@@ -70,7 +70,7 @@ public class P3_B1806_PartialSum {
         process();
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

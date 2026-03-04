@@ -160,7 +160,7 @@ public class P1_B14888_OperatorInsert {
         System.out.println(sb.toString());
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

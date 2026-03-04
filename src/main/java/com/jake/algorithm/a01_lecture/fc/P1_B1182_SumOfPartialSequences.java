@@ -66,7 +66,7 @@ public class P1_B1182_SumOfPartialSequences {
         System.out.println(answer);
     }
 
-    static class FastReader {
+    private static class FastReader {
         BufferedReader br;
         StringTokenizer st;
 

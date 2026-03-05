@@ -28,7 +28,7 @@ import java.util.StringTokenizer;
  *
  * 작성일 : 2026.03.02
  */
-public class P4_B2110_InstallRouter {
+public class P3_B2110_InstallRouter {
     static FastReader scan = new FastReader();
 
     static int N, C;

@@ -28,7 +28,7 @@ import java.util.StringTokenizer;
  *
  * 작성일 : 2023.03.03
  */
-public class P4_B1260_DFS_BFS {
+public class P5_B1260_DFS_BFS {
     static FastReader scan = new FastReader();
     static StringBuilder sb = new StringBuilder();
 

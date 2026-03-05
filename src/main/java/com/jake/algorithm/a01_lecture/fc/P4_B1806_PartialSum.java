@@ -22,7 +22,7 @@ import java.util.StringTokenizer;
  *
  * 작성일 : 2026.03.02
  */
-public class P3_B1806_PartialSum {
+public class P4_B1806_PartialSum {
     static FastReader scan = new FastReader();
 
     static int n, S;

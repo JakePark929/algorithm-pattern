@@ -35,7 +35,7 @@ import java.util.StringTokenizer;
  *
  * 작성일 : 2026.03.02
  */
-public class P3_B2805_CutTree {
+public class P4_B2805_CutTree {
     static FastReader scan = new FastReader();
 
     static int N, M;

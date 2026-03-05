@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
  *
  * 작성일 : 2026.03.03
  */
-public class P3_B1253_Good {
+public class P4_B1253_Good {
     static FastReader scan = new FastReader();
 
     static int N;

@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
  *
  * 작성일 : 2026.04.22
  */
-public class B11726_2xNTilling {
+public class P9_B11726_2xNTilling {
     static FastReader scan = new FastReader();
 
     static int N;
